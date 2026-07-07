@@ -1,0 +1,29 @@
+{
+  "name": "planit-jupiter-toys-assessment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright automation solution for the Planit technical assessment.",
+  "scripts": {
+    "test": "playwright test",
+    "test:core": "playwright test --project=core-chromium",
+    "test:stability": "playwright test --project=stability-chromium",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "pnpm typecheck && pnpm lint && pnpm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.61.1",
+    "@types/node": "26.1.0",
+    "eslint": "10.6.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.62.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.7.0"
+}
