@@ -1,4 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
+import type { ProductOrder } from '../test-data/products';
 
 export class ShopPage {
   constructor(private readonly page: Page) {}
@@ -15,6 +16,12 @@ export class ShopPage {
 
     for (let item = 0; item < quantity; item += 1) {
       await buyLink.click();
+    }
+  }
+
+  async buyProducts(productOrders: readonly ProductOrder[]): Promise<void> {
+    for (const product of productOrders) {
+      await this.buy(product.name, product.quantity);
     }
   }
 }
