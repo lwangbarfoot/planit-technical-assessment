@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { ContactPage } from '../pages/contact.page';
 import { HomePage } from '../pages/home.page';
 import { NavigationComponent } from '../pages/navigation.component';
+import { contactData } from '../test-data/contact';
 
 test('test case 1 - mandatory contact errors clear after valid input', async ({
   page,
@@ -29,11 +30,7 @@ test('test case 1 - mandatory contact errors clear after valid input', async ({
   });
 
   await test.step('Populate mandatory fields and verify errors are gone', async () => {
-    await contactPage.fillMandatoryFields({
-      forename: 'Ling',
-      email: 'ling.automation@example.com',
-      message: 'Planit technical assessment validation test.',
-    });
+    await contactPage.fillMandatoryFields(contactData.validation);
 
     await expect(contactPage.forenameRequiredError).toBeHidden();
     await expect(contactPage.emailRequiredError).toBeHidden();
