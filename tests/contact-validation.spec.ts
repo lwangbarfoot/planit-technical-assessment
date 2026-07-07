@@ -18,7 +18,14 @@ test('test case 1 - mandatory contact errors clear after valid input', async ({
 
   await test.step('Submit an empty form and verify mandatory errors', async () => {
     await contactPage.submit();
-    await contactPage.expectMandatoryErrorsVisible();
+
+    await expect(contactPage.forenameRequiredError).toHaveText(
+      'Forename is required',
+    );
+    await expect(contactPage.emailRequiredError).toHaveText('Email is required');
+    await expect(contactPage.messageRequiredError).toHaveText(
+      'Message is required',
+    );
   });
 
   await test.step('Populate mandatory fields and verify errors are gone', async () => {
@@ -28,6 +35,8 @@ test('test case 1 - mandatory contact errors clear after valid input', async ({
       message: 'Planit technical assessment validation test.',
     });
 
-    await contactPage.expectMandatoryErrorsHidden();
+    await expect(contactPage.forenameRequiredError).toBeHidden();
+    await expect(contactPage.emailRequiredError).toBeHidden();
+    await expect(contactPage.messageRequiredError).toBeHidden();
   });
 });

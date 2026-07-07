@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 
 export interface ContactDetails {
   forename: string;
@@ -40,24 +40,5 @@ export class ContactPage {
   async submitForm(details: ContactDetails): Promise<void> {
     await this.fillMandatoryFields(details);
     await this.submit();
-  }
-
-  async expectMandatoryErrorsVisible(): Promise<void> {
-    await expect(this.forenameRequiredError).toHaveText('Forename is required');
-    await expect(this.emailRequiredError).toHaveText('Email is required');
-    await expect(this.messageRequiredError).toHaveText('Message is required');
-  }
-
-  async expectMandatoryErrorsHidden(): Promise<void> {
-    await expect(this.forenameRequiredError).toBeHidden();
-    await expect(this.emailRequiredError).toBeHidden();
-    await expect(this.messageRequiredError).toBeHidden();
-  }
-
-  async expectSubmissionSuccess(name: string): Promise<void> {
-    await expect(this.successAlert).toContainText(
-      `Thanks ${name}, we appreciate your feedback.`,
-      { timeout: 30_000 },
-    );
   }
 }
